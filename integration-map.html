@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID-19 Map integration</title>
+
+    <style>
+        * {
+            font-family: "Open Sans", Arial, Helvetica, sans-serif;
+        }
+
+        iframe {
+            border: 0;
+        }
+        
+        .header {
+            font-size: 2rem;
+            color: #939aa0;
+            padding: 1rem 0 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Covid-19 Map example integration</h1>
+    </div>
+    <div id="mapIntegration">
+        <p style="text-align: right; color: #939aa0; font-size: 10px; margin-top: 4px">
+            Basierend auf Daten von <a href="https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Fallzahlen.html" style="color: #939aa0" target="_blank">RKI</a> und
+            <a href="https://www.symptoma.de" style="color: #939aa0" target="_blank">Symptoma.de</a> | <a href="https://www.symptoma.de/de/privacy" style="color: #939aa0" target="_blank">Datenschutz</a>
+        </p>
+    </div>
+    
+    <script>
+    var covid_map_config = {
+      selector: 'mapIntegration',
+      splashScreen: true,
+      font: {
+        name: 'Roboto',
+        url: 'https://fonts.googleapis.com/css2?family=Roboto' // or any other url that serves web fonts
+    
+      },
+      colors: {
+        primary: '#005dad',
+        secondary: '#498ecc'
+      },
+      height: '640px',
+      width: '100%',
+      interactions: true,
+      paddingBottom: '0'
+    };
+    </script>
+    
+    <script id="covid-map-integration" src="https://covid-19-map.symptoma.com/embed.js"></script>
+    
+    <script>
+    window.addEventListener('message', function (e) {
+      if (!e.data.type) {
+        return;
+      }
+    
+      if (e.data.type === 'interaction') {
+        console.log('User interacted with map');
+      } else if (e.data.type === 'isFullscreen') {
+        console.log('Map fullscreen' + e.data.value);
+      }
+    });
+    </script>    
+</body>
+</html>
